@@ -1,0 +1,32 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title test
+        link(href='css/libs.css', rel='stylesheet')
+        link(href='css/main.min.css', rel='stylesheet')
+    body
+        .container
+            h1 My first hatajs app
+            form
+                .row
+                    .form-group.col-md-6
+                        .row
+                            .col-xs-8
+                                input#input.form-control(type="test", name="title")
+                            a#submit.btn.btn-default.col-md-4(src="#") Save
+            .row
+                .col-md-4
+                    h2 Inbox
+                    #col1
+                .col-md-4
+                    h2 Now
+                    #col2
+                .col-md-4
+                    h2 Later
+                    #col3
+    footer
+    script(src='js/libs.js')
+    script(src='js/main.min.js')
+    script(src='js/hatajs.min.js')
+    script(src='js/app.min.js')
