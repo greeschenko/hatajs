@@ -23,9 +23,7 @@ echo "        sendfile  off;" >> /etc/nginx/sites-available/default
 echo "        location / {" >> /etc/nginx/sites-available/default
 echo "            try_files \$uri \$uri/ =404;" >> /etc/nginx/sites-available/default
 echo "            access_log        off;" >> /etc/nginx/sites-available/default
-echo "            expires           0;" >> /etc/nginx/sites-available/default
-echo "            add_header        Cache-Control private;" >> /etc/nginx/sites-available/default
-echo "        }" >> /etc/nginx/sites-available/default
-echo "    }" >> /etc/nginx/sites-available/default
-
+echo "            expires           0;" >> /etc/nginx/sites-available/default echo "            add_header        Cache-Control private;" >> /etc/nginx/sites-available/default echo "        }" >> /etc/nginx/sites-available/default echo "    }" >> /etc/nginx/sites-available/default
 sudo /etc/init.d/nginx restart
+
+sudo npm install -g codeceptjs
