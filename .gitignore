@@ -2,3 +2,5 @@
 .vagrant
 node_modules
 tests/output/*
+
+/vendor/

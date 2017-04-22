@@ -1,0 +1,12 @@
+{
+    "name": "greeschenko/hatajs",
+    "description": "easy MVC DOM build framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oleksiy Hryshchenko",
+            "email": "greeschenko@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
