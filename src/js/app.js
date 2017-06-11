@@ -1,79 +1,83 @@
-let inbox = new Hata('#col1', 'tmpls/main');
-inbox.data = [{
-    name: 'test1',
-}, {
-    name: 'test2',
-}];
-inbox.events = function() {
-    inbox.el.children().each(function(index) {
-        let el = $(this);
-        el.find('.delbtn').bind('click', function() {
-            inbox.data.splice(el.index(), 1);
-            inbox.render();
-        });
-        el.find('.nowbtn').bind('click', function() {
-            now.data.push({
-                name: inbox.data[el.index()].name
+let inbox = new Hata('#col1', 'tmpls/main', [{
+        name: 'test1',
+    }, {
+        name: 'test2',
+    }],
+    function() {
+        let self = this;
+        self.el.children().each(function(index) {
+            let el = $(this);
+            el.find('.delbtn').bind('click', function() {
+                self.data.splice(el.index(), 1);
+                self.render();
             });
-            inbox.data.splice(el.index(), 1);
-            inbox.render();
-            now.render();
-        });
-        el.find('.laterbtn').bind('click', function() {
-            later.data.push({
-                name: inbox.data[el.index()].name
+            el.find('.nowbtn').bind('click', function() {
+                now.data.push({
+                    name: self.data[el.index()].name
+                });
+                self.data.splice(el.index(), 1);
+                self.render();
+                now.render();
             });
-            inbox.data.splice(el.index(), 1);
-            inbox.render();
-            later.render();
-        });
-    });
-};
-inbox.render();
-
-
-let now = new Hata('#col2', 'tmpls/main');
-now.events = function() {
-    now.el.children().each(function(index) {
-        let el = $(this);
-        el.find('.delbtn').bind('click', function() {
-            now.data.splice(el.index(), 1);
-            now.render();
-        });
-        el.find('.nowbtn').remove();
-        el.find('.laterbtn').bind('click', function() {
-            later.data.push({
-                name: now.data[el.index()].name
+            el.find('.laterbtn').bind('click', function() {
+                later.data.push({
+                    name: self.data[el.index()].name
+                });
+                self.data.splice(el.index(), 1);
+                self.render();
+                later.render();
             });
-            now.data.splice(el.index(), 1);
-            now.render();
-            later.render();
         });
-    });
-};
-now.render();
+    }
+).render();
 
-
-let later = new Hata('#col3', 'tmpls/main');
-later.events = function() {
-    later.el.children().each(function(index) {
-        let el = $(this);
-        el.find('.delbtn').bind('click', function() {
-            later.data.splice(el.index(), 1);
-            later.render();
-        });
-        el.find('.nowbtn').bind('click', function() {
-            now.data.push({
-                name: later.data[el.index()].name
+let now = new Hata(
+    '#col2',
+    'tmpls/main', [],
+    function() {
+        let self = this;
+        self.el.children().each(function(index) {
+            let el = $(this);
+            el.find('.delbtn').bind('click', function() {
+                self.data.splice(el.index(), 1);
+                self.render();
             });
-            later.data.splice(el.index(), 1);
-            later.render();
-            now.render();
+            el.find('.nowbtn').remove();
+            el.find('.laterbtn').bind('click', function() {
+                later.data.push({
+                    name: self.data[el.index()].name
+                });
+                self.data.splice(el.index(), 1);
+                self.render();
+                later.render();
+            });
         });
-        el.find('.laterbtn').remove();
-    });
-};
-later.render();
+    }
+).render();
+
+let later = new Hata(
+    '#col3',
+    'tmpls/main', [],
+    function() {
+        let self = this;
+        self.el.children().each(function(index) {
+            let el = $(this);
+            el.find('.delbtn').bind('click', function() {
+                self.data.splice(el.index(), 1);
+                self.render();
+            });
+            el.find('.nowbtn').bind('click', function() {
+                now.data.push({
+                    name: self.data[el.index()].name
+                });
+                self.data.splice(el.index(), 1);
+                self.render();
+                now.render();
+            });
+            el.find('.laterbtn').remove();
+        });
+    }
+).render();
 
 $('#submit').bind('click', function() {
     inbox.data.push({

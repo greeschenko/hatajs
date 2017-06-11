@@ -1,9 +1,10 @@
 class Hata {
-    constructor(res, dom, data = []) {
+    constructor(res, dom, data = [], events) {
         this.res = res;
         this.dom = dom;
         this.data = data;
         this.el = $(this.res);
+        this.events = events;
         this.init();
     }
     init() {
@@ -22,6 +23,7 @@ class Hata {
             self.el.html(self.setData(self.data, self.dom));
         }
         self.events();
+        return self;
     }
     change(newdata) {
         this.data = newdata;
@@ -32,9 +34,6 @@ class Hata {
             html = html.replace(new RegExp('{{' + i + '}}', 'g'), obj[i]);
         }
         return html;
-    }
-    events() {
-        return false;
     }
     loadTmpl() {
         let self = this;
