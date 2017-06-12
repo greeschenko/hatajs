@@ -86,3 +86,10 @@ $('#submit').bind('click', function() {
     $('#input').val('');
     inbox.render();
 });
+
+let test = new Hata('#res', 'tmpls/test')
+test.data = {
+    "test1": "sdlfjsdlfsd",
+    "test2": "sdlfjsdlfsdjfl",
+};
+test.render();
