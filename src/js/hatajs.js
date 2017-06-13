@@ -1,5 +1,5 @@
 class Hata {
-    constructor(res, dom, data, events) {
+    constructor(res, dom, data, events, dataurl, interval) {
         this.res = res;
         this.dom = dom;
         this.data = data;
@@ -10,6 +10,8 @@ class Hata {
             }
         }
         this.events = events;
+        this.dataurl = dataurl;
+        this.interval = interval;
         this.init();
     }
     init() {
@@ -43,15 +45,20 @@ class Hata {
     loadTmpl() {
         let self = this;
         let xmlhttp = new XMLHttpRequest();
+        self.el.css('opacity', '0');
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                 if (xmlhttp.status == 200) {
                     self.dom = xmlhttp.responseText;
+                    self.render();
+                    self.el.animate({
+                        'opacity': '1'
+                    }, 500);
                 }
             }
         };
 
-        xmlhttp.open("GET", '/' + self.dom + '.html', false);
+        xmlhttp.open("GET", '/' + self.dom + '.html', true);
         xmlhttp.send();
     }
 }
