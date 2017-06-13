@@ -15,7 +15,15 @@ class Hata {
         this.init();
     }
     init() {
-        this.loadTmpl();
+        let self = this;
+        self.loadTmpl();
+        self.loadData();
+        if (self.interval != undefined) {
+            setInterval(function() {
+                self.loadData();
+                self.render();
+            }, self.interval);
+        }
     }
     render() {
         let self = this;
@@ -44,21 +52,32 @@ class Hata {
     }
     loadTmpl() {
         let self = this;
+        self.getData('/' + self.dom + '.html', function(xmlhttp) {
+            self.dom = xmlhttp.responseText;
+            self.render();
+        });
+    }
+    loadData() {
+        let self = this;
+        if (this.dataurl != undefined) {
+            self.getData(this.dataurl, function(xmlhttp) {
+                self.data = JSON.parse(xmlhttp.responseText);
+                self.render();
+            });
+        }
+    }
+    getData(url, handler) {
+        let self = this;
         let xmlhttp = new XMLHttpRequest();
-        //self.el.css('opacity', '0');
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                 if (xmlhttp.status == 200) {
-                    self.dom = xmlhttp.responseText;
-                    self.render();
-                    //self.el.animate({
-                    //'opacity': '1'
-                    //}, 500);
+                    handler(xmlhttp);
                 }
             }
         };
 
-        xmlhttp.open("GET", '/' + self.dom + '.html', true);
+        xmlhttp.open("GET", url, true);
         xmlhttp.send();
     }
 }

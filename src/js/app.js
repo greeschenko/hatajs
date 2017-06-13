@@ -87,9 +87,8 @@ $('#submit').bind('click', function() {
     inbox.render();
 });
 
-let test = new Hata('#res', 'tmpls/test')
-test.data = {
-    "test1": "sdlfjsdlfsd",
-    "test2": "sdlfjsdlfsdjfl",
-};
-test.render();
+let test = new Hata(
+    '#res',
+    'tmpls/test', {},
+    undefined,
+    '/data/test.json', 3000);
