@@ -45,15 +45,15 @@ class Hata {
     loadTmpl() {
         let self = this;
         let xmlhttp = new XMLHttpRequest();
-        self.el.css('opacity', '0');
+        //self.el.css('opacity', '0');
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                 if (xmlhttp.status == 200) {
                     self.dom = xmlhttp.responseText;
                     self.render();
-                    self.el.animate({
-                        'opacity': '1'
-                    }, 500);
+                    //self.el.animate({
+                    //'opacity': '1'
+                    //}, 500);
                 }
             }
         };
