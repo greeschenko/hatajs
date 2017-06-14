@@ -12,6 +12,8 @@ class Hata {
         this.events = events;
         this.dataurl = dataurl;
         this.interval = interval;
+        this.dataloaded = false;
+        this.domloaded = false;
         this.init();
     }
     init() {
@@ -28,16 +30,23 @@ class Hata {
     render() {
         let self = this;
 
-        if (Array.isArray(self.data)) {
-            self.el.html('');
-            for (let one in self.data) {
-                let one = self.data[one];
-                self.el.append(self.setData(one, self.dom));
+        if (self.dataloaded && self.domloaded) {
+            if (Array.isArray(self.data)) {
+                self.el.html('');
+                for (let one in self.data) {
+                    let one = self.data[one];
+                    self.el.append(self.setData(one, self.dom));
+                }
+            } else {
+                self.el.html(self.setData(self.data, self.dom));
             }
+            self.events();
         } else {
-            self.el.html(self.setData(self.data, self.dom));
+            setTimeout(function() {
+                self.render();
+            }, 500);
         }
-        self.events();
+
         return self;
     }
     change(newdata) {
@@ -54,7 +63,7 @@ class Hata {
         let self = this;
         self.getData('/' + self.dom + '.html', function(xmlhttp) {
             self.dom = xmlhttp.responseText;
-            self.render();
+            self.domloaded = true;
         });
     }
     loadData() {
@@ -62,8 +71,10 @@ class Hata {
         if (this.dataurl != undefined) {
             self.getData(this.dataurl, function(xmlhttp) {
                 self.data = JSON.parse(xmlhttp.responseText);
-                self.render();
+                self.dataloaded = true;
             });
+        } else {
+            self.dataloaded = true;
         }
     }
     getData(url, handler) {

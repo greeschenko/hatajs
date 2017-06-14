@@ -91,4 +91,6 @@ let test = new Hata(
     '#res',
     'tmpls/test', {},
     undefined,
-    '/data/test.json', 3000);
+    '/data/test.json',
+    3000
+);
