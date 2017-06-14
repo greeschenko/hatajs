@@ -43,6 +43,7 @@ class Hata {
             self.events();
         } else {
             setTimeout(function() {
+                console.log([self.dataloaded, self.domloaded]);
                 self.render();
             }, 500);
         }
