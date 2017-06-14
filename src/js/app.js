@@ -93,4 +93,4 @@ let test = new Hata(
     undefined,
     '/data/test.json',
     3000
-);
+).render();

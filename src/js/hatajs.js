@@ -61,10 +61,16 @@ class Hata {
     }
     loadTmpl() {
         let self = this;
-        self.getData('/' + self.dom + '.html', function(xmlhttp) {
-            self.dom = xmlhttp.responseText;
-            self.domloaded = true;
-        });
+        self.getData(
+            '/' + self.dom + '.html',
+            function(xmlhttp) {
+                self.dom = xmlhttp.responseText;
+                self.domloaded = true;
+            },
+            function() {
+                self.domloaded = true;
+            }
+        );
     }
     loadData() {
         let self = this;
@@ -77,13 +83,17 @@ class Hata {
             self.dataloaded = true;
         }
     }
-    getData(url, handler) {
+    getData(url, handler, errhandler) {
         let self = this;
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                 if (xmlhttp.status == 200) {
                     handler(xmlhttp);
+                } else {
+                    if (errhandler != undefined) {
+                        errhandler();
+                    }
                 }
             }
         };
