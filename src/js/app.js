@@ -92,5 +92,5 @@ let test = new Hata(
     'tmpls/test', {},
     undefined,
     '/data/test.json',
-    3000
+    1000
 ).render();
