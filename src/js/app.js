@@ -90,7 +90,14 @@ $('#submit').bind('click', function() {
 let test = new Hata(
     '#res',
     'tmpls/test', {},
-    undefined,
-    '/data/test.json',
-    1000
+    function() {
+        let self = this;
+        self.el.bind('click', function() {
+            console.log(4444);
+            self.dataurl = '/data/test_new.json';
+            self.rerender();
+        });
+    },
+    '/data/test.json'
+    //1000
 ).render();

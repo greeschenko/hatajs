@@ -14,6 +14,7 @@ class Hata {
         this.interval = interval;
         this.dataloaded = false;
         this.domloaded = false;
+        this.html = '';
         this.init();
     }
     init() {
@@ -35,22 +36,25 @@ class Hata {
                 self.el.html('');
                 for (let one in self.data) {
                     let one = self.data[one];
-                    self.el.append(self.setData(one, self.dom));
+                    self.el.append(self.setData(one, self.html));
                 }
             } else {
-                self.el.html(self.setData(self.data, self.dom));
+                self.el.html(self.setData(self.data, self.html));
             }
             self.events();
         } else {
             setTimeout(function() {
                 self.render();
-            }, 500);
+            }, 100);
         }
 
         return self;
     }
-    change(newdata) {
-        this.data = newdata;
+    rerender() {
+        this.dataloaded = false;
+        this.domloaded = false;
+        this.loadTmpl();
+        this.loadData();
         this.render();
     }
     setData(obj, html) {
@@ -64,7 +68,7 @@ class Hata {
         self.getData(
             '/' + self.dom + '.html',
             function(xmlhttp) {
-                self.dom = xmlhttp.responseText;
+                self.html = xmlhttp.responseText;
                 self.domloaded = true;
             },
             function() {
