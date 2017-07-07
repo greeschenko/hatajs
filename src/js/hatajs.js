@@ -73,6 +73,7 @@ class Hata {
             },
             function() {
                 self.domloaded = true;
+                self.html = self.dom;
             }
         );
     }

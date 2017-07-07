@@ -89,7 +89,10 @@ $('#submit').bind('click', function() {
 
 let test = new Hata(
     '#res',
-    'tmpls/test', {},
+    //'tmpls/test',
+    `
+    <h2>{{test1}}</h2>
+    `, {},
     function() {
         let self = this;
         self.el.bind('click', function() {
