@@ -45,7 +45,7 @@ class Hata {
         } else {
             setTimeout(function() {
                 self.render();
-            }, 500);
+            }, 100);
         }
 
         return self;
