@@ -1,9 +1,14 @@
 class Hata {
     constructor(res, dom, data, events, dataurl, interval) {
         this.res = res;
+        if (this.res instanceof jQuery) {
+            this.el = res;
+        } else {
+            this.el = $(this.res);
+        }
+        this.res = res;
         this.dom = dom;
         this.data = data;
-        this.el = $(this.res);
         if (events == undefined) {
             events = function() {
                 return false;

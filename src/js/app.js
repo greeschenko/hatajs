@@ -104,3 +104,31 @@ let test = new Hata(
     '/data/test.json'
     //1000
 ).render();
+
+
+let testuseelts = new Hata(
+    '#testres',
+    //'tmpls/test',
+    `
+    <div class="test_item">{{test}}<div class="list"></div></div>
+    `, [{
+        "test": 1111
+    }, {
+        "test": "dlsfdlsjf"
+    }],
+    function() {
+        this.el.find('.list').each(function(index) {
+            new Hata(
+                $(this),
+                //'tmpls/test',
+                `
+                <div class="list_item" style="padding-left:1em;">{{test}}</div>
+                `, [{
+                    "test": 1111
+                }, {
+                    "test": "dlsfdlsjf"
+                }]
+            ).render();
+        });
+    }
+).render();
