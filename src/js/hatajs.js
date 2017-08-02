@@ -1,5 +1,5 @@
 class Hata {
-    constructor(res, dom, data, events, dataurl, interval) {
+    constructor(res, dom, data, events, dataurl, interval, errorevents) {
         this.res = res;
         if (this.res instanceof jQuery) {
             this.el = res;
@@ -20,6 +20,7 @@ class Hata {
         this.dataloaded = false;
         this.domloaded = false;
         this.html = '';
+        this.errorevents = errorevents;
         this.init();
     }
     init() {
@@ -85,10 +86,14 @@ class Hata {
     loadData() {
         let self = this;
         if (this.dataurl != undefined) {
-            self.getData(this.dataurl, function(xmlhttp) {
-                self.data = JSON.parse(xmlhttp.responseText);
-                self.dataloaded = true;
-            });
+            self.getData(
+                this.dataurl,
+                function(xmlhttp) {
+                    self.data = JSON.parse(xmlhttp.responseText);
+                    self.dataloaded = true;
+                },
+                self.errorevents
+            );
         } else {
             self.dataloaded = true;
         }
