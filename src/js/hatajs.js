@@ -71,21 +71,23 @@ class Hata {
     }
     loadTmpl() {
         let self = this;
-        if (self.dom.indexOf('{{') !== -1 || self.dom.indexOf('<') !== -1) {
-            self.domloaded = true;
-            self.html = self.dom;
-        } else {
-            self.getData(
-                '/' + self.dom + '.html',
-                function(xmlhttp) {
-                    self.html = xmlhttp.responseText;
-                    self.domloaded = true;
-                },
-                function() {
-                    self.domloaded = true;
-                    self.html = self.dom;
-                }
-            );
+        if (self.dom !== undefined) {
+            if (self.dom.indexOf('{{') !== -1 || self.dom.indexOf('<') !== -1) {
+                self.domloaded = true;
+                self.html = self.dom;
+            } else {
+                self.getData(
+                    '/' + self.dom + '.html',
+                    function(xmlhttp) {
+                        self.html = xmlhttp.responseText;
+                        self.domloaded = true;
+                    },
+                    function() {
+                        self.domloaded = true;
+                        self.html = self.dom;
+                    }
+                );
+            }
         }
     }
     loadData() {
