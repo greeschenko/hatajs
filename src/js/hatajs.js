@@ -88,6 +88,9 @@ class Hata {
                     }
                 );
             }
+        } else {
+            self.domloaded = true;
+            self.html = self.dom;
         }
     }
     loadData() {
