@@ -71,7 +71,7 @@ class Hata {
     }
     loadTmpl() {
         let self = this;
-        if (self.dom.includes('{{') || self.dom.includes('<')) {
+        if (self.dom.indexOf('{{') !== -1 || self.dom.indexOf('<') !== -1) {
             self.domloaded = true;
             self.html = self.dom;
         } else {
